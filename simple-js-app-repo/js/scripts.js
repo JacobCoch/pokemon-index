@@ -1,1 +1,4 @@
-console.log('anne');
+alert('Hello World');
+
+let favoriteFood = 'Tacos';
+document.write(favoriteFood);
