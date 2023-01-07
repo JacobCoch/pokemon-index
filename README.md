@@ -1,1 +1,1 @@
-# simple-js-app-repo
+# Javascript Learning
