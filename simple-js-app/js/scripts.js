@@ -1,5 +1,3 @@
-let pokemonList = [pokemon1, pokemon2, pokemon3];
-
 let pokemon1 = {
     name: 'Staraptor',
     type: ['Flying', 'Normal'],
@@ -20,3 +18,7 @@ let pokemon3 = {
     weight: 210,
     unit: 'kg'
 };
+
+let pokemonList = [pokemon1, pokemon2, pokemon3];
+
+for (let i = 0; i )
