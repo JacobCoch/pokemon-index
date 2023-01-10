@@ -29,5 +29,6 @@ for (let i = 0; i < pokemonList.length; i++ ){
     if (pokemon.weight > 100){
         document.write ("Wow, that's big! ")
     }
+    // this creates a line break after each object
     document.write("<br>")
 }
