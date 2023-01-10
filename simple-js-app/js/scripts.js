@@ -30,4 +30,5 @@ for (let i = 0; i < pokemonList.length; i++ ){
         document.write ("Wow, that's big! ")
     }
     document.write("<br>")
+    
 }
