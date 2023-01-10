@@ -21,4 +21,7 @@ let pokemon3 = {
 
 let pokemonList = [pokemon1, pokemon2, pokemon3];
 
-for (let i = 0; i )
+for (let i = 0; i < pokemonList.length; i++ ){
+    let pokemon = pokemonList[i];
+    document.write (pokemon.name + ": " + pokemon.weight + " " + pokemon.unit + " ");
+}
