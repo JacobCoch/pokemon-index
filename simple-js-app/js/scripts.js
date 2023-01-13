@@ -24,11 +24,18 @@ let pokemonRepository = (function() {
         },
     ];
     return {
-        getAll: function() {
+        getAll: function() { // the getAll method will return the pokemonLIst Array
             return pokemonList;
         },
-        add: function(item) {
-            pokemonList.push(item);
+        add: function(item) {  // the add method allows you to add something to the array
+            let expectedKeys = ['name', 'type', 'weight', 'unit']; // an array with the types of keys we expect to see 
+            let objectKeys = Object.keys(item); // get the keys of the passed object
+            let isValid = expectedKeys.every(key => objectKeys.indexOf(key) !== -1);
+            if (typeof item === 'object' && isValid) {
+                pokemonList.push(item);
+            } else {
+                console.log("Error: Only objects can be added to this repository")   
+            }  
         }
     }
 })();
