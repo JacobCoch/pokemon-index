@@ -11,56 +11,47 @@ body {
 	font-weight: 400;
 	font-size: 16px;
 	line-height: 1.6;
-	padding-left: 10px;
-	padding-right: 10px;
 	color: $color_1;
 	background-color: $background-color_1;
-	padding: 30px;
+	margin-top: 180px;
 }
 
 * {
 	box-sizing: border-box;
 }
 
-.header {
+.navbar {
 	display: flex;
-	flex-flow: row wrap;
-	align-items: center;
-	justify-content: center;
+	position: fixed;
+	flex-flow: row ;
+	justify-content: space-between;
 	margin: auto;
+	width: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 999;
+	background-color: darkgoldenrod;
 }
-.header-item {
-	position: relative;
+.navbar-title { 
 	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
 	font-size: 50px;
+	padding-left: 10px;
 }
-.header-item span {
-    position: relative;
-    display: inline-block;
-    text-transform: uppercase;
-    -webkit-animation: header-item 1s infinite; // this is browser support
-    -webkit-animation-delay: calc(.1s * var(--i)); // this is browser support
-	-webkit-animation-iteration-count: 2; // this is browser support
-    animation: header-item 1.5s infinite;
-    animation-delay: calc(.1s * var(--i));
-	animation-iteration-count: 2;
+.searchbar { 
+	display: flex;
+	align-self: center;
+	margin-right: 50px;
+	border-radius: .7rem;
+	line-height: 1.5rem;
+	font-size: 16px;
 }
-// this webkit is for browser support 
-@-webkit-keyframes header-item {
-	0%,40%,100% {
-	  transform: translateY(0)
-	}
-	20% {
-	  transform: translateY(-20px)
-	}
+.button-class {
+	text-align: center;
+	border: none;
+	cursor: pointer;
+	color: black;
 }
-@keyframes header-item { // this keyframes is connecting the the header-item above to perform the animation
-	0%,40%,100% {
-	  transform: translateY(0)
-	}
-	20% {
-	  transform: translateY(-40px) // this is how hight the letters will go and come back down
-	}
-}
+
