@@ -23,31 +23,67 @@ let pokemonRepository = (function() {
             unit: 'kg'
         },
     ];
-    return {
-        getAll: function() { // the getAll method will return the pokemonLIst Array
-            return pokemonList;
-        },
-        add: function(item) {  // the add method allows you to add something to the array
-            let expectedKeys = ['name', 'type', 'weight', 'unit']; // an array with the types of keys we expect to see 
-            let objectKeys = Object.keys(item); // get the keys of the passed object
-            let isValid = expectedKeys.every(key => objectKeys.indexOf(key) !== -1);
-            if (typeof item === 'object' && isValid) {
-                pokemonList.push(item);
-            } else {
-                console.log("Error: Only objects can be added to this repository")   
-            }  
+    // this function allows you to add another pokemon with conditionals
+    function add(pokemon) {
+        if (
+            typeof pokemon === "object" &&
+            "name" in pokemon &&
+            "type" in pokemon &&
+            "weight" in pokemon &&
+            "unit" in pokemon 
+        ) {
+            pokemonList.push(pokemon);
+        } else {
+            console.log("Error: Only objects can be added to this repository")   
         }
     }
+
+    // this function getAll will return the array pokemonList
+    function getAll() {
+        return pokemonList;
+    }
+
+    // this is definin what the showDetails function will do 
+    function showDetails(pokemon) {
+        console.log(pokemon)
+    }
+
+    // this function is adding a listItem and a button
+    function addListItem(pokemon) {  
+        // this is grabing the .pokemon-list class in the HTML doc
+        let pokemonList = document.querySelector(".pokemon-list"); 
+        // this is creating a new 'li' element in the DOM
+        let listItem = document.createElement('li');
+        // this is creating a button
+        let button = document.createElement('button');
+        // this puts the pokemons name in the button
+        button.innerText = pokemon.name; 
+        // this created a button-class for CSS to call upon
+        button.classList.add("button-class");
+        // this is adding the button element as the last child of the listItem element
+        listItem.appendChild(button);
+        // is adding the listItem element as the last child of the pokemonList element.
+        pokemonList.appendChild(listItem);
+        // this will show the name of pokemon in console when the button is clicked
+        button.addEventListener('click', function(){
+            showDetails(pokemon.name);
+        })
+    }
+
+    return {
+        add: add,
+        getAll: getAll,
+        addListItem: addListItem,
+    };
 })();
+
+// this will add a new pokemon to the pokemonRepository
+pokemonRepository.add({ name: "Pikachu", type: ['Electric'], weight: 6, unit: 'kg'});
 
 console.log(pokemonRepository.getAll());
 
+pokemonRepository.getAll().forEach(function (pokemon) { 
+    pokemonRepository.addListItem(pokemon);
+});
 
-function loopFunction(pokemon) {
-    document.write(pokemon.name + ": " + pokemon.weight + "(" + pokemon.unit + ") ");
-    if (pokemon.weight > 25) {
-        document.write(" -" + "Wow, that's big!")
-    }
-    document.write("<br>")
-} 
-pokemonRepository.getAll().forEach(loopFunction);
+
