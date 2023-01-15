@@ -1,40 +1,20 @@
     
 let pokemonRepository = (function() {
-    let pokemonList = [
-        // object1
-        {
-            name: 'Staraptor',
-            type: ['Flying', 'Normal'],
-            weight: 24.9, 
-            unit: 'kg'
-        },
-        // object 2
-        {
-            name: 'Jigglypuff', 
-            type: ['Fairy', 'Normal'], 
-            weight: 5.5, 
-            unit: 'kg'
-        },
-        // object 3
-        {
-            name: 'Onix', 
-            type: ['Rock','Ground'], 
-            weight: 210,
-            unit: 'kg'
-        },
-    ];
+    let pokemonList = [];
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
     // this function allows you to add another pokemon with conditionals
+    
     function add(pokemon) {
+        // Validation of input type: Has to be an object which contains the keys name and detailsUrl
         if (
-            typeof pokemon === "object" &&
-            "name" in pokemon &&
-            "type" in pokemon &&
-            "weight" in pokemon &&
-            "unit" in pokemon 
+          typeof pokemon === 'object' &&
+          Object.keys(pokemon).includes('name' && 'detailsUrl')
         ) {
-            pokemonList.push(pokemon);
+          pokemonList.push(pokemon);
         } else {
-            console.log("Error: Only objects can be added to this repository")   
+          console.error(
+            'Pokémon has to be added using this format: {name:, detailsUrl:}'
+          );
         }
     }
 
@@ -45,8 +25,10 @@ let pokemonRepository = (function() {
 
     // this is definin what the showDetails function will do 
     function showDetails(pokemon) {
-        console.log(pokemon)
-    }
+        loadDetails(pokemon).then(function () {
+            console.log(pokemon);
+        });
+    }   
 
     // this function is adding a listItem and a button
     function addListItem(pokemon) {  
@@ -70,15 +52,53 @@ let pokemonRepository = (function() {
         })
     }
 
+    // this function will load the list of pokemon
+    function loadList() {
+        return fetch(apiUrl).then(function (response) {
+          return response.json();
+        }).then(function (json) {
+          json.results.forEach(function (item) {
+            let pokemon = {
+              name: item.name,
+              detailsUrl: item.url
+            };
+            add(pokemon);
+          });
+        }).catch(function (e) {
+          console.error(e);
+        })
+    }
+
+    function loadDetails(item) {
+        let url = item.detailsUrl;
+        return fetch(url).then(function (response) {
+          return response.json();
+        }).then(function (details) {
+          // Now we add the details to the item
+          item.imageUrl = details.sprites.front_default;
+          item.height = details.height;
+          item.types = details.types;
+        }).catch(function (e) {
+          console.error(e);
+        });
+    }
+
     return {
         add: add,
         getAll: getAll,
         addListItem: addListItem,
+        loadList: loadList,
+        loadDetails: loadDetails,
+        showDetails: showDetails
     };
 })();
 
 // this will add a new pokemon to the pokemonRepository
-pokemonRepository.add({ name: "Pikachu", type: ['Electric'], weight: 6, unit: 'kg'});
+pokemonRepository.loadList().then(function() {
+    pokemonRepository.getAll().forEach(function(pokemon){
+      pokemonRepository.addListItem(pokemon);
+    });
+});
 
 console.log(pokemonRepository.getAll());
 
