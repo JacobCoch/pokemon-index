@@ -1,11 +1,11 @@
     
-let pokemonRepository = (function() {
+let pokemonRepository = (() => {
     let pokemonList = [];
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
     // this function allows you to add another pokemon with conditionals
     
-    function add(pokemon) {
-        // Validation of input type: Has to be an object which contains the keys name and detailsUrl
+    // Validation of input type: Has to be an object which contains the keys name and detailsUrl
+    let add = (pokemon) => {
         if (
           typeof pokemon === 'object' &&
           Object.keys(pokemon).includes('name' && 'detailsUrl')
@@ -19,20 +19,19 @@ let pokemonRepository = (function() {
     }
 
     // this function getAll will return the array pokemonList
-    function getAll() {
-        return pokemonList;
-    }
+    const getAll = () => pokemonList;
 
-    // this is definin what the showDetails function will do 
-    function showDetails(pokemon) {
-        loadDetails(pokemon).then(() => {
+    // this is defining what the showDetails function will do 
+    let showDetails = (pokemon) => {
+        loadDetails(pokemon)
+        .then(() => {
             console.log(pokemon);
         });
 
     }   
 
     // this function is adding a listItem and a button
-    function addListItem(pokemon) {  
+    let addListItem = (pokemon) => {  
         // this is grabing the .pokemon-list class in the HTML doc
         let pokemonList = document.querySelector(".pokemon-list"); 
         // this is creating a new 'li' element in the DOM
@@ -54,7 +53,7 @@ let pokemonRepository = (function() {
     }
 
     // this function will load the list of pokemon
-    function loadList() {
+    let loadList = () => {
         return fetch(apiUrl)
         .then((response) => {
           return response.json();
@@ -71,7 +70,7 @@ let pokemonRepository = (function() {
         })
     }
 
-    function loadDetails(item) {
+    let loadDetails = (item) => {
         let url = item.detailsUrl;
         return fetch(url)
         .then((response) => {
@@ -97,15 +96,15 @@ let pokemonRepository = (function() {
 })();
 
 // this will add a new pokemon to the pokemonRepository
-pokemonRepository.loadList().then(function() {
-    pokemonRepository.getAll().forEach(function(pokemon){
+pokemonRepository.loadList().then(() => {
+    pokemonRepository.getAll().forEach((pokemon) => {
       pokemonRepository.addListItem(pokemon);
     });
 });
 
 console.log(pokemonRepository.getAll());
 
-pokemonRepository.getAll().forEach(function (pokemon) { 
+pokemonRepository.getAll().forEach((pokemon) => { 
     pokemonRepository.addListItem(pokemon);
 });
 
