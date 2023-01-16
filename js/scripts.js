@@ -25,9 +25,10 @@ let pokemonRepository = (function() {
 
     // this is definin what the showDetails function will do 
     function showDetails(pokemon) {
-        loadDetails(pokemon).then(function () {
+        loadDetails(pokemon).then(() => {
             console.log(pokemon);
         });
+
     }   
 
     // this function is adding a listItem and a button
@@ -47,38 +48,40 @@ let pokemonRepository = (function() {
         // is adding the listItem element as the last child of the pokemonList element.
         pokemonList.appendChild(listItem);
         // this will show the name of pokemon in console when the button is clicked
-        button.addEventListener('click', function(){
+        button.addEventListener('click', () => {
             showDetails(pokemon.name);
         })
     }
 
     // this function will load the list of pokemon
     function loadList() {
-        return fetch(apiUrl).then(function (response) {
+        return fetch(apiUrl)
+        .then((response) => {
           return response.json();
-        }).then(function (json) {
-          json.results.forEach(function (item) {
+        }).then((json) => {
+          json.results.forEach((item) => {
             let pokemon = {
               name: item.name,
               detailsUrl: item.url
             };
             add(pokemon);
           });
-        }).catch(function (e) {
+        }).catch((e) => {
           console.error(e);
         })
     }
 
     function loadDetails(item) {
         let url = item.detailsUrl;
-        return fetch(url).then(function (response) {
+        return fetch(url)
+        .then((response) => {
           return response.json();
-        }).then(function (details) {
+        }).then((details) => {
           // Now we add the details to the item
           item.imageUrl = details.sprites.front_default;
           item.height = details.height;
           item.types = details.types;
-        }).catch(function (e) {
+        }).catch((e) => {
           console.error(e);
         });
     }
