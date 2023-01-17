@@ -1,16 +1,35 @@
     
-let pokemonRepository = (() => {
+const pokemonRepository = (() => {
     let pokemonList = [];
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
     // this function allows you to add another pokemon with conditionals
     
-    // Validation of input type: Has to be an object which contains the keys name and detailsUrl
-    let add = (pokemon) => {
-        if (
-          typeof pokemon === 'object' &&
-          Object.keys(pokemon).includes('name' && 'detailsUrl')
+    // this function will load the pokiapi list
+    async function loadList() { 
+      showLoadingMessage();
+      try{
+        const response = await fetch(apiUrl); // gets pokemonapi promise
+        const json = await response.json(); // response turned with json() method to json
+        json.results.forEach((item) => { // iterates over the results of the json
+          let pokemon = {  // pokemon variable is the .name
+            name: item.name,
+            url: item.url
+          };
+          add(pokemon);
+        });
+        hideLoadingMessage();
+      } catch (e) { 
+        console.error(e);
+        hideLoadingMessage();
+      }
+    }
+        
+    function add(pokemon) { // function grabs the pokemonapi list through the loadList function
+        if ( 
+          typeof pokemon === 'object' &&  // if pokemon is an object 
+          Object.keys(pokemon).includes('name' && 'url') // and the keys are .name and .detailsUrl
         ) {
-          pokemonList.push(pokemon);
+          pokemonList.push(pokemon); // if so push pokemon to the pokemonList array
         } else {
           console.error(
             'Pokémon has to be added using this format: {name:, detailsUrl:}'
@@ -18,94 +37,76 @@ let pokemonRepository = (() => {
         }
     }
 
-    // this function getAll will return the array pokemonList
-    const getAll = () => pokemonList;
+    async function loadDetails(pokemon) { 
+      showLoadingMessage();
+      try { 
+        const response = await fetch(pokemon.url);
+        const json = await response.json();
+        pokemon.imgUrl = json.sprites.front_default;
+        pokemon.height = json.height;
+        pokemon.types = json.types;
+        hideLoadingMessage();
+      } catch(e) { 
+        console.error(e);
+        hideLoadingMessage();
+      }
+    }
+
+    function showLoadingMessage() {
+      let loadingMessage = document.createElement('p'); // this is creating an element 'p'
+      loadingMessage.innerText = 'Loading...'; // this will display on the inner text
+      loadingMessage.classList.add('loading-message'); //creates a classlist. call => '.loading-message'
+      document.body.appendChild(loadingMessage); // adds element to the <body> element
+    }
+    
+    function hideLoadingMessage() {
+      let loadingMessage = document.querySelector('.loading-message'); //this is selecting the loadingMessage element
+      document.body.removeChild(loadingMessage); // this is revoming the element when called 
+    }
+    
+    function getAll() { // getAll function will return the array pokemonList
+      return pokemonList;
+    } 
 
     // this is defining what the showDetails function will do 
-    let showDetails = (pokemon) => {
-        loadDetails(pokemon)
-        .then(() => {
-            console.log(pokemon);
-        });
-
+    async function showDetails(pokemon) {
+        try {
+          await loadDetails(pokemon);
+          console.log(pokemon);
+        }catch(e) { 
+          console.error(e);
+      }
     }   
-
-    // this function is adding a listItem and a button
-    let addListItem = (pokemon) => {  
-        // this is grabing the .pokemon-list class in the HTML doc
-        let pokemonList = document.querySelector(".pokemon-list"); 
-        // this is creating a new 'li' element in the DOM
-        let listItem = document.createElement('li');
-        // this is creating a button
-        let button = document.createElement('button');
-        // this puts the pokemons name in the button
-        button.innerText = pokemon.name; 
-        // this created a button-class for CSS to call upon
-        button.classList.add("button-class");
-        // this is adding the button element as the last child of the listItem element
-        listItem.appendChild(button);
-        // is adding the listItem element as the last child of the pokemonList element.
-        pokemonList.appendChild(listItem);
-        // this will show the name of pokemon in console when the button is clicked
-        button.addEventListener('click', () => {
-            showDetails(pokemon.name);
-        })
-    }
-
-    // this function will load the list of pokemon
-    let loadList = () => {
-        return fetch(apiUrl)
-        .then((response) => {
-          return response.json();
-        }).then((json) => {
-          json.results.forEach((item) => {
-            let pokemon = {
-              name: item.name,
-              detailsUrl: item.url
-            };
-            add(pokemon);
-          });
-        }).catch((e) => {
-          console.error(e);
-        })
-    }
-
-    let loadDetails = (item) => {
-        let url = item.detailsUrl;
-        return fetch(url)
-        .then((response) => {
-          return response.json();
-        }).then((details) => {
-          // Now we add the details to the item
-          item.imageUrl = details.sprites.front_default;
-          item.height = details.height;
-          item.types = details.types;
-        }).catch((e) => {
-          console.error(e);
-        });
+    
+    function addListItem(pokemon) { // this function is adding a listItem and a button
+        let pokemonList = document.querySelector(".pokemon-list"); // this is grabing the .pokemon-list class in the HTML doc
+        let listItem = document.createElement('li'); // this is creating a new 'li' element in the DOM
+        let button = document.createElement('button'); // this is creating a button
+        button.innerText = pokemon.name; // this puts the pokemons name in the button
+        button.classList.add("button-class"); // this created a button-class for CSS to call upon
+        listItem.appendChild(button); // this is adding the button element as the last child of the listItem element
+        pokemonList.appendChild(listItem); // is adding the listItem element as the last child of the pokemonList element.
+        button.addEventListener('click', () => { // this will show the name of pokemon in console when the button is clicked
+            showDetails(pokemon);
+      })
     }
 
     return {
-        add: add,
-        getAll: getAll,
-        addListItem: addListItem,
-        loadList: loadList,
-        loadDetails: loadDetails,
-        showDetails: showDetails
+      loadList: loadList,
+      add: add,
+      loadDetails: loadDetails,
+      getAll: getAll,
+      showDetails: showDetails,
+      addListItem: addListItem
     };
 })();
 
 // this will add a new pokemon to the pokemonRepository
-pokemonRepository.loadList().then(() => {
-    pokemonRepository.getAll().forEach((pokemon) => {
-      pokemonRepository.addListItem(pokemon);
-    });
-});
-
-console.log(pokemonRepository.getAll());
-
-pokemonRepository.getAll().forEach((pokemon) => { 
+pokemonRepository.loadList().then(() => { 
+  const allpokemon = pokemonRepository.getAll();
+  allpokemon.forEach((pokemon) => { 
     pokemonRepository.addListItem(pokemon);
+  });
 });
 
 
