@@ -13,7 +13,7 @@ const pokemonRepository = (() => {
         json.results.forEach((item) => { // iterates over the results of the json
           let pokemon = {  // pokemon variable is the .name
             name: item.name,
-            url: item.url
+            detailsUrl: item.url
           };
           add(pokemon);
         });
@@ -21,6 +21,20 @@ const pokemonRepository = (() => {
       } catch (e) { 
         console.error(e);
         hideLoadingMessage();
+      }
+    }
+    
+    async function loadDetails(item) { 
+      let url = item.detailsUrl;
+      showLoadingMessage();
+      try {
+        const response = await fetch(url);
+        const details = await response.json();
+        item.imgUrl = json.sprites.front_default;
+        item.height = json.height;
+        item.types = json.types;
+      } catch (e) {
+        console.error(e);
       }
     }
         
@@ -37,20 +51,6 @@ const pokemonRepository = (() => {
         }
     }
 
-    async function loadDetails(pokemon) { 
-      showLoadingMessage();
-      try { 
-        const response = await fetch(pokemon.url);
-        const json = await response.json();
-        pokemon.imgUrl = json.sprites.front_default;
-        pokemon.height = json.height;
-        pokemon.types = json.types;
-        hideLoadingMessage();
-      } catch(e) { 
-        console.error(e);
-        hideLoadingMessage();
-      }
-    }
 
     function showLoadingMessage() {
       let loadingMessage = document.createElement('p'); // this is creating an element 'p'
@@ -69,23 +69,45 @@ const pokemonRepository = (() => {
     } 
 
     // this is defining what the showDetails function will do 
-    async function showDetails(pokemon) {
-        try {
-          await loadDetails(pokemon);
-          console.log(pokemon);
-        }catch(e) { 
-          console.error(e);
-      }
+    function showDetails(pokemon) {
+      let modalContainer = document.createElement('div');
+      modalContainer.classList.add('modal-container');
+      let name = document.createElement('h2');
+      name.innerText = pokemon.name;
+      modalContainer.appendChild(name);
+    
+
+      let height = document.createElement('p');
+      height.innerText = 'Height' + ': ' + pokemon.height;
+      modalContainer.appendChild(height);
+
+      let img = document.createElement('img');
+      img.src = pokemon.imgUrl;
+      modalContainer.appendChild(img);
+
+      let types = document.createElement('p');
+      types.innerText = 'Types' + ': ' + pokemon.types;
+      modalContainer.appendChild(types);
+
+      let closeButton = document.createElement('button');
+    closeButton.innerText = 'Close';
+    closeButton.addEventListener('click', () => {
+        document.body.removeChild(modalContainer);
+    });
+    modalContainer.appendChild(closeButton);
+
+    document.body.appendChild(modalContainer);
     }   
     
     function addListItem(pokemon) { // this function is adding a listItem and a button
         let pokemonList = document.querySelector(".pokemon-list"); // this is grabing the .pokemon-list class in the HTML doc
-        let listItem = document.createElement('li'); // this is creating a new 'li' element in the DOM
+        let listItems = document.createElement('li'); // this is creating a new 'li' element in the DOM
         let button = document.createElement('button'); // this is creating a button
+        listItems.classList.add('list-items'); // added a css selector for the li
         button.innerText = pokemon.name; // this puts the pokemons name in the button
         button.classList.add("button-class"); // this created a button-class for CSS to call upon
-        listItem.appendChild(button); // this is adding the button element as the last child of the listItem element
-        pokemonList.appendChild(listItem); // is adding the listItem element as the last child of the pokemonList element.
+        listItems.appendChild(button); // this is adding the button element as the last child of the listItem element
+        pokemonList.appendChild(listItems); // is adding the listItem element as the last child of the pokemonList element.
         button.addEventListener('click', () => { // this will show the name of pokemon in console when the button is clicked
             showDetails(pokemon);
       })
