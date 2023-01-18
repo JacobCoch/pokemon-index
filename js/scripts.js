@@ -24,15 +24,14 @@ const pokemonRepository = (() => {
       }
     }
     
-    async function loadDetails(item) { 
-      let url = item.detailsUrl;
+    async function loadDetails(pokemon) { 
+      let url = pokemon.detailsUrl;
       showLoadingMessage();
       try {
         const response = await fetch(url);
         const details = await response.json();
-        item.imgUrl = json.sprites.front_default;
-        item.height = json.height;
-        item.types = json.types;
+        pokemon.height = details.height;
+        pokemon.imgUrl = details.sprites.front_default;
       } catch (e) {
         console.error(e);
       }
@@ -41,7 +40,7 @@ const pokemonRepository = (() => {
     function add(pokemon) { // function grabs the pokemonapi list through the loadList function
         if ( 
           typeof pokemon === 'object' &&  // if pokemon is an object 
-          Object.keys(pokemon).includes('name' && 'url') // and the keys are .name and .detailsUrl
+          Object.keys(pokemon).includes('name' && 'detailsUrl') // and the keys are .name and .detailsUrl
         ) {
           pokemonList.push(pokemon); // if so push pokemon to the pokemonList array
         } else {
@@ -70,33 +69,36 @@ const pokemonRepository = (() => {
 
     // this is defining what the showDetails function will do 
     function showDetails(pokemon) {
-      let modalContainer = document.createElement('div');
-      modalContainer.classList.add('modal-container');
-      let name = document.createElement('h2');
-      name.innerText = pokemon.name;
-      modalContainer.appendChild(name);
-    
+      loadDetails(pokemon).then(function() {
+        let modalContainer = document.createElement('div');
+        modalContainer.classList.add('modal-container');
+        let name = document.createElement('h2');
+        name.innerText = pokemon.name;
+        modalContainer.appendChild(name);
+      
+  
+        let height = document.createElement('p');
+        height.innerText = 'Height' + ': ' + pokemon.height;
+        modalContainer.appendChild(height);
+  
+        let img = document.createElement('img');
+        img.src = pokemon.imgUrl;
+        modalContainer.appendChild(img);
+  
+        let types = document.createElement('p');
+        types.innerText = 'Types' + ': ' + pokemon.types;
+        modalContainer.appendChild(types);
+  
+        let closeButton = document.createElement('button');
+      closeButton.innerText = 'Close';
+      closeButton.addEventListener('click', () => {
+          document.body.removeChild(modalContainer);
+      });
+      modalContainer.appendChild(closeButton);
+  
+      document.body.appendChild(modalContainer);
+      })
 
-      let height = document.createElement('p');
-      height.innerText = 'Height' + ': ' + pokemon.height;
-      modalContainer.appendChild(height);
-
-      let img = document.createElement('img');
-      img.src = pokemon.imgUrl;
-      modalContainer.appendChild(img);
-
-      let types = document.createElement('p');
-      types.innerText = 'Types' + ': ' + pokemon.types;
-      modalContainer.appendChild(types);
-
-      let closeButton = document.createElement('button');
-    closeButton.innerText = 'Close';
-    closeButton.addEventListener('click', () => {
-        document.body.removeChild(modalContainer);
-    });
-    modalContainer.appendChild(closeButton);
-
-    document.body.appendChild(modalContainer);
     }   
     
     function addListItem(pokemon) { // this function is adding a listItem and a button
