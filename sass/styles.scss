@@ -1,6 +1,7 @@
 $color_1: #fff;
 $font-family_1: 'Noto Sans', sans-serif;
 $background-color_1: #0A2647;
+$background-color_2:  #051831;
 
 // these are differenet color combos for the background color
 // #144272 , #205295 , #2C74B3
@@ -48,10 +49,43 @@ body {
 	line-height: 1.5rem;
 	font-size: 16px;
 }
+
 .button-class {
 	text-align: center;
 	border: none;
 	cursor: pointer;
 	color: black;
+	width: 180px;
+	height: 180px;
+	border-radius: 0.6rem;
 }
 
+
+.pokemon-list { 
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+	height: 100%;
+	padding: 45px;
+	margin: 60px;
+	background-color: $background-color_2;
+	border-radius: 0.7rem;
+	overflow-x: scroll;
+}
+.list-items { 
+	display: flex;
+	flex-grow: 1;
+	padding: 10px;
+}
+
+.modal-container {
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+
+// .pokemon-list li{
+// 	display: flex;
+// 	gap: 30px;
+// }
