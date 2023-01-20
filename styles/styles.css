@@ -71,7 +71,11 @@ body {
   padding: 10px;
 }
 
-.modal-container {
+#modal-container {
+  display: none;
+}
+
+#modal-container.is-visible {
   position: fixed;
   top: 0;
   left: 0;
@@ -83,6 +87,34 @@ body {
   justify-content: center;
   width: 100%;
   height: 100%;
+  padding-top: 150px;
+}
+
+.modal-content {
+  display: flex;
+  flex-flow: row wrap;
+  background-color: darkgoldenrod;
+  height: 400px;
+  width: 300px;
+  border-radius: 0.6rem;
+  border: 4px solid;
+}
+
+.modal-title {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 30px;
+}
+
+.modal-close {
+  position: fixed;
+  float: right;
+}
+
+.modal-img {
+  margin-top: 20px;
+  width: 50%;
+  size: 60%;
 }
 
 /*# sourceMappingURL=styles.css.map */
