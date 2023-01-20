@@ -80,10 +80,12 @@ const pokemonRepository = (() => {
         let modalContent = document.createElement('div');
         modalContent.classList.add('modal-content');
 
+        let modalBody = document.createElement('div');
+        modalBody.classList.add('modal-body');
 
-        let name = document.createElement('h2');
-        name.innerText = pokemon.name;
-        name.classList.add('modal-title');
+        let modalTitle = document.createElement('div');
+        modalTitle.innerText = pokemon.name;
+        modalTitle.classList.add('modal-title');
       
   
         let height = document.createElement('p');
@@ -120,18 +122,19 @@ const pokemonRepository = (() => {
       })
 
       document.body.addEventListener('click', function(event) {
-        if (!modalContent.contains(event.taget) && modalContainer.classList.contains('is-visible')) {
+        if (!modalContent.contains(event.target) && !modalTitle.contains(event.target) && !modalBody.contains(event.target)) {
             modalContainer.classList.remove('is-visible');
           }
       });
 
       
-      modalContent.appendChild(name);
-      modalContent.appendChild(backImg);
-      modalContent.appendChild(frontImg);
-      modalContent.appendChild(height);
+      modalContent.appendChild(modalTitle);
+      modalContent.appendChild(modalBody);
+      modalTitle.appendChild(closeButton);
+      modalBody.appendChild(frontImg);
+      modalBody.appendChild(backImg);
+      modalBody.appendChild(height);
       
-      modalContent.appendChild(closeButton);
       modalContainer.appendChild(modalContent);
       document.body.appendChild(modalContainer);
 
