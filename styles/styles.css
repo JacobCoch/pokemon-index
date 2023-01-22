@@ -17,8 +17,8 @@ body {
   position: fixed;
   flex-flow: row;
   justify-content: space-between;
-  margin: auto;
   width: 100%;
+  height: 120px;
   top: 0;
   left: 0;
   right: 0;
@@ -27,21 +27,16 @@ body {
 }
 
 .navbar-title {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  font-size: 50px;
+  font-size: 42px;
   padding-left: 10px;
 }
 
 .searchbar {
-  display: flex;
   align-self: center;
   margin-right: 50px;
   border-radius: 0.7rem;
   border: none;
-  line-height: 1.5rem;
-  font-size: 16px;
+  line-height: 1.7rem;
 }
 
 .button-class {
@@ -115,6 +110,7 @@ body {
 
 .modal-close {
   float: right;
+  text-align: center;
   font-size: 1rem;
   border-radius: 0.3rem;
   border: none;
@@ -124,7 +120,9 @@ body {
 .modal-body {
   position: relative;
   flex: 1 1 auto;
-  padding: 1rem;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 26px;
 }
 
 .modal-img {
@@ -132,10 +130,10 @@ body {
   width: 50%;
 }
 
-.modal-text {
-  font-size: 20px;
-  padding-left: 8px;
-  text-align: center;
+.modal-height,
+.modal-types {
+  padding-top: 10px;
+  margin: 0;
 }
 
 /*# sourceMappingURL=styles.css.map */
