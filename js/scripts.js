@@ -161,7 +161,7 @@ const pokemonRepository = (function() {
         button.innerText = pokemon.name;     // button has pokemon.name
         button.classList.add("button-class");  // added a class to button
 
-        let pokemonImg = document.createElement('img');
+        let pokemonImg = document.createElement('img'); //! img is undefined
         pokemonImg.src = pokemon.frontImg;
         
         button.addEventListener('click', () => {  // when button is clicked the showDetails() is invoked
