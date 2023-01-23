@@ -40,13 +40,22 @@ body {
 }
 
 .button-class {
-  text-align: center;
-  border: none;
+  border: 5px solid;
+  border-color: #fff;
   cursor: pointer;
-  color: black;
+  color: #fff;
   width: 180px;
   height: 180px;
   border-radius: 0.6rem;
+  display: flex;
+  flex-flow: column;
+  background-color: darkgoldenrod;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.button-pokemonImg {
+  height: 100%;
 }
 
 .pokemon-list {
@@ -67,11 +76,11 @@ body {
   padding: 10px;
 }
 
-#modal-container {
+.hidden {
   display: none;
 }
 
-#modal-container.is-visible {
+.modal-container {
   position: fixed;
   top: 0;
   left: 0;
