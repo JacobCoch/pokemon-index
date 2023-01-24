@@ -1,6 +1,6 @@
 # Pokemon Index
 
-## Here is the link: 
+## Here is the link: https://jarjardinks.github.io/simple-js-app/
 ## Description:
 - This is a pokemon index project I am building, working with HTML, CSS, and JavaScript.
 
