@@ -1,3 +1,4 @@
+/*-----------General---------*/
 body {
   font-family: "Noto Sans", sans-serif;
   font-weight: 400;
@@ -6,56 +7,40 @@ body {
   color: #fff;
   background-color: #0A2647;
   margin-top: 180px;
+  overflow: scroll;
 }
 
-* {
-  box-sizing: border-box;
+ul {
+  list-style: none;
+  outline: none;
 }
 
+/*------------Elements-----------*/
 .navbar {
-  display: flex;
-  position: fixed;
-  flex-flow: row;
-  justify-content: space-between;
-  width: 100%;
-  height: 120px;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
-  background-color: darkgoldenrod;
+  height: 75px;
 }
 
 .navbar-title {
-  font-size: 42px;
-  padding-left: 10px;
-}
-
-.searchbar {
-  align-self: center;
-  margin-right: 50px;
-  border-radius: 0.7rem;
-  border: none;
-  line-height: 1.7rem;
+  font-size: 40px;
 }
 
 .button-class {
-  border: 5px solid;
+  border: 3px solid;
   border-color: #fff;
-  cursor: pointer;
   color: #fff;
-  width: 180px;
-  height: 180px;
+  width: 225px;
+  height: 250px;
   border-radius: 0.6rem;
-  display: flex;
-  flex-flow: column;
   background-color: darkgoldenrod;
-  font-size: 20px;
   text-transform: uppercase;
 }
 
+.button-class:hover {
+  opacity: 0.8;
+}
+
 .button-pokemonImg {
-  height: 100%;
+  height: 80%;
 }
 
 .pokemon-list {
@@ -63,38 +48,13 @@ body {
   flex-flow: row wrap;
   justify-content: space-around;
   height: 100%;
-  padding: 45px;
-  margin: 60px;
+  padding: 10px;
   background-color: #051831;
   border-radius: 0.7rem;
-  overflow-x: scroll;
+  row-gap: 1rem;
 }
 
-.list-items {
-  display: flex;
-  flex-grow: 1;
-  padding: 10px;
-}
-
-.hidden {
-  display: none;
-}
-
-.modal-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  padding-top: 150px;
-}
-
+/*-------Modal---------*/
 .modal-content {
   display: flex;
   position: relative;
@@ -109,39 +69,24 @@ body {
 }
 
 .modal-title {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 1rem 1rem;
   text-transform: uppercase;
   font-size: 24px;
 }
 
-.modal-close {
-  float: right;
-  text-align: center;
-  font-size: 1rem;
-  border-radius: 0.3rem;
-  border: none;
-  margin-left: 2.4rem;
-}
-
 .modal-body {
-  position: relative;
-  flex: 1 1 auto;
   padding: 0.5rem;
   text-align: center;
-  font-size: 26px;
 }
 
 .modal-img {
   margin-top: 20px;
   width: 50%;
+  height: 170px;
 }
 
 .modal-height,
 .modal-types {
-  padding-top: 10px;
+  padding-top: 20px;
   margin: 0;
 }
 
