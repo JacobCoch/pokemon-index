@@ -2,6 +2,7 @@ const pokemonRepository = (function() {
     const pokemonList = [];
     const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
     const listPokemon = document.querySelector(".pokemon-list"); // selecting div from html
+    const inputField = document.querySelector('.form-control');
 
     async function loadList() { 
       showLoadingMessage();
@@ -78,7 +79,26 @@ const pokemonRepository = (function() {
     function getAll() { // getAll function will return the array pokemonList
       return pokemonList;
     } 
- 
+
+    function findPokemon(searchTerm) { 
+      return pokemonList.filter(function(pokemon) { 
+        const pokemonLowerCase = pokemon.name.toLowerCase();
+        const searchTermLowerCase = searchTerm.toLowerCase();
+        return pokemonLowerCase.startsWith(searchTermLowerCase);
+      });
+    }
+    inputField.addEventListener('input', function() {
+      const searchTerm = inputField.ariaValueMax;
+      const filteredList = findPokemon(searchTerm);
+      removeList();
+      if (filteredList.length === 0) { 
+        showErrorMessage(
+          'Sorry, there are no Pokemon matching your search criteria.'
+        );
+      } else { 
+        filteredList.forEach(addListItem)
+      }
+    });
     
     function addListItem(pokemon) { 
       loadDetails(pokemon).then(function() { // must load pokemondetails to load imgUrl onto button
@@ -160,7 +180,8 @@ const pokemonRepository = (function() {
       loadDetails: loadDetails,
       getAll: getAll,
       showDetails: showDetails,
-      addListItem: addListItem
+      addListItem: addListItem,
+      findPokemon: findPokemon
     };
 })();
 
