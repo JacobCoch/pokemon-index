@@ -4,7 +4,15 @@
   "description": "- This is a pokemon index project I am building, working with HTML, CSS, and JavaScript.",
   "main": "index.js",
   "devDependencies": {
-    "gulp": "^4.0.2"
+    "autoprefixer": "^10.4.13",
+    "cssnano": "^5.1.14",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-postcss": "^9.0.1",
+    "gulp-replace": "^1.1.4",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
