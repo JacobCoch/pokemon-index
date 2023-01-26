@@ -26,7 +26,8 @@
     "gulp-replace": "^1.1.4",
     "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^3.0.0",
-    "gulp-uglify": "^3.0.2"
+    "gulp-uglify": "^3.0.2",
+    "prettier": "2.8.3"
   },
   "dependencies": {
     "sass": "^1.57.1"
