@@ -29,10 +29,10 @@ function scssTask() {
 // JS task
 function jsTask() {
     return src(files.jsPath)
+    .pipe(sourcemaps.init())
     .pipe(concat('all.js'))
     .pipe(uglify())
-    .pipe(dest('dist')
-    );
+    .pipe(dest('dist'));
 }
 
 // Watch task
