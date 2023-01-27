@@ -32,6 +32,7 @@ function jsTask() {
     .pipe(sourcemaps.init())
     .pipe(concat('all.js'))
     .pipe(uglify())
+    .pipe(sourcemaps.write())
     .pipe(dest('dist'));
 }
 
