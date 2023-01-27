@@ -4,6 +4,15 @@ const pokemonRepository = (function() {
     const listPokemon = document.querySelector(".pokemon-list"); // selecting div from html
     const inputField = document.querySelector('.form-control');
 
+    inputField.addEventListener('input', function() { 
+      const searchValue = inputField.value.toLowerCase();
+      const filteredPokemon = pokemonList.filter(pokemon =>
+        pokemon.name.toLowerCase().includes(searchValue)
+      );
+      listPokemon.innerHTML = '';
+      filteredPokemon.forEach(pokemon => addListItem(pokemon));
+    });
+
     async function loadList() { 
       showLoadingMessage();
       try{
@@ -80,25 +89,6 @@ const pokemonRepository = (function() {
       return pokemonList;
     } 
 
-    function findPokemon(searchTerm) { 
-      return pokemonList.filter(function(pokemon) { 
-        const pokemonLowerCase = pokemon.name.toLowerCase();
-        const searchTermLowerCase = searchTerm.toLowerCase();
-        return pokemonLowerCase.startsWith(searchTermLowerCase);
-      });
-    }
-    inputField.addEventListener('input', function() {
-      const searchTerm = inputField.ariaValueMax;
-      const filteredList = findPokemon(searchTerm);
-      removeList();
-      if (filteredList.length === 0) { 
-        showErrorMessage(
-          'Sorry, there are no Pokemon matching your search criteria.'
-        );
-      } else { 
-        filteredList.forEach(addListItem)
-      }
-    });
     
     function addListItem(pokemon) { 
       loadDetails(pokemon).then(function() { // must load pokemondetails to load imgUrl onto button
@@ -181,7 +171,6 @@ const pokemonRepository = (function() {
       getAll: getAll,
       showDetails: showDetails,
       addListItem: addListItem,
-      findPokemon: findPokemon
     };
 })();
 
