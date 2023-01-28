@@ -1,3 +1,6 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-undef */
+/* eslint-disable no-console */
 const pokemonRepository = (() => {
   const pokemonList = [];
   const pokemonApiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
