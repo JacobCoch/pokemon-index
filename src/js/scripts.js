@@ -67,7 +67,7 @@ const pokemonRepository = (() => {
       modalTitle.classList.add('modal-title');
 
       const height = document.createElement('p'); // creating an element for the pokemon.height
-      height.innerText = 'Height' + `: ${pokemon.height}`;
+      height.textContent = `Height: ${pokemon.height}`;
       height.classList.add('modal-height');
 
       const frontImg = document.createElement('img'); // creating img elements for the pokemon
@@ -81,7 +81,7 @@ const pokemonRepository = (() => {
       modalText.classList.add('modal-text');
 
       const types = document.createElement('p');
-      types.innerText = 'Types' + `: ${pokemon.types}`;
+      types.textContent = `Types: ${pokemon.types}`;
       types.classList.add('modal-types');
 
       modalBody.appendChild(frontImg);
