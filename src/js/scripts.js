@@ -1,6 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-undef */
-/* eslint-disable no-console */
 const pokemonRepository = (() => {
   const pokemonList = [];
   const pokemonApiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
@@ -18,7 +15,8 @@ const pokemonRepository = (() => {
 
       const pokemonTypeList = [];
 
-      details.types.forEach((item) => { // iterating over the details.types
+      details.types.forEach((item) => {
+        // iterating over the details.types
         pokemonTypeList.push(item.type.name); // pushing the items into pokemonTypeList
       });
       pokemon.types = pokemonTypeList.join(', ');
@@ -27,15 +25,17 @@ const pokemonRepository = (() => {
     }
   }
 
-  function addPokemon(pokemon) { // function grabs the pokemonapi
+  function addPokemon(pokemon) {
+    // function grabs the pokemonapi
     if (
-      typeof pokemon === 'object' // if pokemon is an object
-          && Object.keys(pokemon).includes('name') && Object.keys(pokemon).includes('detailsUrl') // and the keys name and .detailsUrl
+      typeof pokemon === 'object' && // if pokemon is an object
+      Object.keys(pokemon).includes('name') &&
+      Object.keys(pokemon).includes('detailsUrl') // and the keys name and .detailsUrl
     ) {
       pokemonList.push(pokemon); // if so push pokemon to the pokemonList array
     } else {
       console.error(
-        'Pokémon has to be added using this format: {name:, detailsUrl:}',
+        'Pokémon has to be added using this format: {name:, detailsUrl:}'
       );
     }
   }
@@ -56,7 +56,8 @@ const pokemonRepository = (() => {
   }
 
   function showDetails(pokemon) {
-    fetchPokemonDetails(pokemon).then(() => { // fetchPokemonDetails gets called in
+    fetchPokemonDetails(pokemon).then(() => {
+      // fetchPokemonDetails gets called in
       const modalBody = document.querySelector('.modal-body');
       const modalTitle = document.querySelector('.modal-title');
 
@@ -97,7 +98,8 @@ const pokemonRepository = (() => {
     try {
       const response = await fetch(pokemonApiUrl); // gets a promise from pokemonApiUrl
       const json = await response.json(); // response is then called with .json() method
-      json.results.forEach((item) => { // iterates over the results of the json
+      json.results.forEach((item) => {
+        // iterates over the results of the json
         const pokemon = {
           name: item.name,
           detailsUrl: item.url,
@@ -111,12 +113,14 @@ const pokemonRepository = (() => {
     }
   }
 
-  function getPokemonList() { // getPokemonList function will return the array pokemonList
+  function getPokemonList() {
+    // getPokemonList function will return the array pokemonList
     return pokemonList;
   }
 
   function addPokemonToList(pokemon) {
-    fetchPokemonDetails(pokemon).then(() => { // must load pokemondetails to load imgUrl onto button
+    fetchPokemonDetails(pokemon).then(() => {
+      // must load pokemondetails to load imgUrl onto button
       const listItems = document.createElement('li'); // creating li element
       listItems.classList.add('list-items');
       listItems.classList.add('group-list-item');
@@ -132,7 +136,8 @@ const pokemonRepository = (() => {
       pokemonImg.src = pokemon.frontImgUrl;
       pokemonImg.classList.add('button-pokemonImg');
 
-      button.addEventListener('click', () => { // when button is clicked the showDetails() is invoked
+      button.addEventListener('click', () => {
+        // when button is clicked the showDetails() is invoked
         showDetails(pokemon);
         $('#exampleModalCenter').modal('show');
       });
@@ -145,8 +150,9 @@ const pokemonRepository = (() => {
 
   searchInput.addEventListener('input', () => {
     const searchValue = searchInput.value.toLowerCase();
-    const filteredPokemon = pokemonList.filter((pokemon) => pokemon.name
-      .toLowerCase().includes(searchValue));
+    const filteredPokemon = pokemonList.filter((pokemon) =>
+      pokemon.name.toLowerCase().includes(searchValue)
+    );
     pokemonListContainer.innerHTML = '';
     filteredPokemon.forEach((pokemon) => addPokemonToList(pokemon));
   });

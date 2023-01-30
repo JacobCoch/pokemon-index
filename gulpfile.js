@@ -4,12 +4,10 @@ const {
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const postcss = require('gulp-postcss');
-const replace = require('gulp-replace');
 const sourcemaps = require('gulp-sourcemaps');
 const sass = require('gulp-sass')(require('sass'));
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
-const browserSync = require('browser-sync').create();
 
 // File Path Variables
 const files = {
