@@ -1,4 +1,4 @@
 module.exports = {
   extends: 'airbnb-base',
-  globals: { document: 'readonly' }
+  globals: { document: 'readonly' },
 };
