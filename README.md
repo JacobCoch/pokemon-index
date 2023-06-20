@@ -1,6 +1,6 @@
 # Pokemon Index
 
-## Here is the link: https://jarjardinks.github.io/simple-js-app/
+## Here is the link: https://jarjardinks.github.io/pokemon-index/
 
 ## Description:
 - To build a small web application with HTML, CSS, and JavaScript that loads data from an external API and enables the viewing of data points in detail.
@@ -15,3 +15,8 @@
 ## Examlpe:
 - If by chance site is down here is a default picture. However, you cant play with the functionality. 
 
+Home Page: 
+![pokemonpage](https://github.com/JarJarDinks/pokemon-index/assets/104926747/13426e22-140b-486e-a7f4-380054577925)
+
+Pokemon Card: 
+![pokemonimg](https://github.com/JarJarDinks/pokemon-index/assets/104926747/7d551c03-d60b-4fc3-a59e-5dc69dcdf877)
