@@ -110,26 +110,31 @@ const pokemonRepository = (() => {
   modalContainer.appendChild(arrowLeft);
   modalContainer.appendChild(arrowRight);
 
-  let currentPokemonIndex = 0; // Set the initial index to 0
+  // Set the initial index to 0
+  let currentPokemonIndex = 0;
 
   // Add event listeners to the arrow buttons outside the showDetails function
   arrowLeft.addEventListener('click', () => {
     let newIndex = currentPokemonIndex;
-    if (newIndex > 0) {
+    if (newIndex === 0) {
+      newIndex = pokemonRepository.getPokemonList().length - 1;
+    } else {
       newIndex--;
-      currentPokemonIndex = newIndex;
-      showDetails(pokemonRepository.getPokemonList()[currentPokemonIndex]);
     }
+    currentPokemonIndex = newIndex;
+    showDetails(pokemonRepository.getPokemonList()[currentPokemonIndex]);
   });
 
   arrowRight.addEventListener('click', () => {
     const newPokemonList = pokemonRepository.getPokemonList();
     let newIndex = currentPokemonIndex;
-    if (newIndex < newPokemonList.length - 1) {
+    if (newIndex === newPokemonList.length - 1) {
+      newIndex = 0;
+    } else {
       newIndex++;
-      currentPokemonIndex = newIndex;
-      showDetails(pokemonRepository.getPokemonList()[currentPokemonIndex]);
     }
+    currentPokemonIndex = newIndex;
+    showDetails(pokemonRepository.getPokemonList()[currentPokemonIndex]);
   });
 
   async function fetchPokemonList() {
@@ -178,7 +183,7 @@ const pokemonRepository = (() => {
       button.addEventListener('click', () => {
         // when button is clicked the showDetails() is invoked
         showDetails(pokemon);
-        document.querySelector('.modal fade').modal('show');
+        document.querySelector('.modal-content').modal('show');
       });
 
       button.appendChild(pokemonImg);
