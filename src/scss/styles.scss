@@ -117,6 +117,17 @@ ul {
   right: -70px;
 }
 
+@media screen and (max-width: 450px) {
+  .arrow-left {
+    top: 420px !important;
+    left: 45px !important;
+  }
+  .arrow-right {
+    top: 420px !important;
+    right: 45px !important;
+  }
+}
+
 /*-------Modal---------*/
 .modal-content {
   // the modal content
