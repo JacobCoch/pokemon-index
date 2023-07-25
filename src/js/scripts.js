@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 const pokemonRepository = (() => {
@@ -95,6 +96,42 @@ const pokemonRepository = (() => {
     });
   }
 
+  // Outside the showDetails function, create the arrow buttons and add event listeners
+  const arrowLeft = document.createElement('button');
+  arrowLeft.classList.add('btn', 'btn-arrow', 'arrow-left');
+  arrowLeft.innerHTML = '<i class="fa-solid fa-arrow-left"></i>';
+
+  const arrowRight = document.createElement('button');
+  arrowRight.classList.add('btn', 'btn-arrow', 'arrow-right');
+  arrowRight.innerHTML = '<i class="fa-solid fa-arrow-right"></i>';
+
+  // Get the modal container and append the arrow buttons to it
+  const modalContainer = document.querySelector('.modal-content');
+  modalContainer.appendChild(arrowLeft);
+  modalContainer.appendChild(arrowRight);
+
+  let currentPokemonIndex = 0; // Set the initial index to 0
+
+  // Add event listeners to the arrow buttons outside the showDetails function
+  arrowLeft.addEventListener('click', () => {
+    let newIndex = currentPokemonIndex;
+    if (newIndex > 0) {
+      newIndex--;
+      currentPokemonIndex = newIndex;
+      showDetails(pokemonRepository.getPokemonList()[currentPokemonIndex]);
+    }
+  });
+
+  arrowRight.addEventListener('click', () => {
+    const newPokemonList = pokemonRepository.getPokemonList();
+    let newIndex = currentPokemonIndex;
+    if (newIndex < newPokemonList.length - 1) {
+      newIndex++;
+      currentPokemonIndex = newIndex;
+      showDetails(pokemonRepository.getPokemonList()[currentPokemonIndex]);
+    }
+  });
+
   async function fetchPokemonList() {
     showLoadingMessage();
     try {
@@ -141,7 +178,7 @@ const pokemonRepository = (() => {
       button.addEventListener('click', () => {
         // when button is clicked the showDetails() is invoked
         showDetails(pokemon);
-        document.querySelector('#exampleModalCenter').modal('show');
+        document.querySelector('.modal fade').modal('show');
       });
 
       button.appendChild(pokemonImg);
