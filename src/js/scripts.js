@@ -30,14 +30,14 @@ const pokemonRepository = (() => {
   function addPokemon(pokemon) {
     // function grabs the pokemonapi
     if (
-      typeof pokemon === 'object'
-      && Object.keys(pokemon).includes('name')
-      && Object.keys(pokemon).includes('detailsUrl')
+      typeof pokemon === 'object' &&
+      Object.keys(pokemon).includes('name') &&
+      Object.keys(pokemon).includes('detailsUrl')
     ) {
       pokemonList.push(pokemon); // if so push pokemon to the pokemonList array
     } else {
       console.error(
-        'Pokémon has to be added using this format: {name:, detailsUrl:}',
+        'Pokémon has to be added using this format: {name:, detailsUrl:}'
       );
     }
   }
@@ -152,8 +152,9 @@ const pokemonRepository = (() => {
 
   searchInput.addEventListener('input', () => {
     const searchValue = searchInput.value.toLowerCase();
-    const filteredPokemon = pokemonList.filter((pokemon) => pokemon
-      .name.toLowerCase().includes(searchValue));
+    const filteredPokemon = pokemonList.filter((pokemon) =>
+      pokemon.name.toLowerCase().includes(searchValue)
+    );
     pokemonListContainer.innerHTML = '';
     filteredPokemon.forEach((pokemon) => addPokemonToList(pokemon));
   });
