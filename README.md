@@ -43,5 +43,5 @@ Home Page:
 ![pokemonpage](https://github.com/JarJarDinks/pokemon-index/assets/104926747/13426e22-140b-486e-a7f4-380054577925)
 
 Pokemon Card: 
-![pokemonimg]![pokemon new pic](https://github.com/JarJarDinks/pokemon-index/assets/104926747/6af10e23-0b89-4442-a0ae-49fbebc30300)
+![pokemonimg](https://github.com/JarJarDinks/pokemon-index/assets/104926747/6af10e23-0b89-4442-a0ae-49fbebc30300)
 
