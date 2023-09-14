@@ -1,22 +1,47 @@
-# Pokemon Index
+# Pokémon Index 🚀
 
-## Here is the link: https://jarjardinks.github.io/pokemon-index/
+Welcome to Pokémon Index, your gateway to the world of Pokémon! This web application allows you to discover and explore details about various Pokémon creatures. Dive into the Pokémon world, view their profiles, and learn more about their characteristics.
 
-## Description:
-- To build a small web application with HTML, CSS, and JavaScript that loads data from an external API and enables the viewing of data points in detail.
-- This is my first project, ever.
+## Table of Contents
+1. [Features](#features)
+2. [Usage](#usage)
+3. [Technical Details](#technical-details)
 
-### Tools:
+## Features
 
-- I have implemented Bootsrap for the modal, navbar, and general styling. The list is ordered with bootstrap as well.
-- I have implemented jQuery, however I have limited the use of it due to popular demand. 
-- The task runner GULP is installed in this project. Allowing easy workflow with minifying css and js. Also giving both a sourcemap.
+🔍 Discover a wide range of Pokémon.
 
-## Examlpe:
-- If by chance site is down here is a default picture. However, you cant play with the functionality. 
+📖 Click on a Pokémon to view its detailed information.
 
+📊 Explore various Pokémon characteristics.
+
+🎨 Aesthetic and user-friendly design.
+
+## Usage
+
+1. Visit the [Pokémon Index](https://jarjardinks.github.io/pokemon-index/).
+2. Browse through the list of Pokémon displayed on the homepage.
+3. Click on a Pokémon to view its detailed profile.
+4. Explore the Pokémon's stats, abilities, and much more.
+
+## Technical Details
+
+Pokémon Index is built using the following technologies:
+
+- **HTML**: The backbone of the web application.
+- **CSS**: For styling and making the app visually appealing.
+- **JavaScript**: To fetch data from the external Pokémon API and display it dynamically.
+- **External Pokémon API**: Providing detailed information about Pokémon.
+- **ESLint**: Ensuring clean and well-formatted JavaScript code.
+- **GitHub Pages**: Hosting the app and making it publicly accessible.
+- **Compatible with popular web browsers like Chrome, Firefox, Safari, Edge, and Internet Explorer 11.
+
+Thank you for exploring the world of Pokémon with us! If you have any questions or need assistance, feel free to reach out. Enjoy your Pokémon journey! 🌟
+
+## Pictures
 Home Page: 
 ![pokemonpage](https://github.com/JarJarDinks/pokemon-index/assets/104926747/13426e22-140b-486e-a7f4-380054577925)
 
 Pokemon Card: 
-![pokemonimg](https://github.com/JarJarDinks/pokemon-index/assets/104926747/7d551c03-d60b-4fc3-a59e-5dc69dcdf877)
+![pokemonimg](https://github.com/JarJarDinks/pokemon-index/assets/104926747/6af10e23-0b89-4442-a0ae-49fbebc30300)
+
