@@ -4,7 +4,8 @@
   "description": "- This is a pokemon index project I am building, working with HTML, CSS, and JavaScript.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "browser-sync start --server --directory --files 'src/**/*.html, src/**/*.js, src/scss/**/*.scss'"
   },
   "repository": {
     "type": "git",
