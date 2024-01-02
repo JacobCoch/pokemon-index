@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JarJarDinks/pokemon-index.git"
+    "url": "git+https://github.com/JacobCoch/pokemon-index.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JarJarDinks/pokemon-index/issues"
+    "url": "https://github.com/JacobCoch/pokemon-index/issues"
   },
-  "homepage": "https://github.com/JarJarDinks/pokemon-index#readme",
+  "homepage": "https://github.com/JacobCoch/pokemon-index#readme",
   "devDependencies": {
     "autoprefixer": "^10.4.13",
     "browser-sync": "^2.27.11",
